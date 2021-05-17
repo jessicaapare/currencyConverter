@@ -1,4 +1,4 @@
-package com.jessica.conversorMoeda;
+package com.jessica.currencyConverter.entity;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Entity
 @Table( name = "conversion" )
-public class Conversion {
+public class ConversionEntity {
 	
 	@Getter @Setter
 	  private Long id;
@@ -43,9 +43,9 @@ public class Conversion {
 	  
 	  
 
-	  public Conversion() {}
+	  public ConversionEntity() {}
 
-	  public Conversion(Long id, Long userId, String sourceCurrency, String targetCurrency, String sourceValue, String targetValue, String rate, Date datetime) {
+	  public ConversionEntity(Long id, Long userId, String sourceCurrency, String targetCurrency, String sourceValue, String targetValue, String rate, Date datetime) {
 		  this.id = id;
 		  this.userId = userId;
 		  this.sourceCurrency = sourceCurrency;
@@ -56,4 +56,20 @@ public class Conversion {
 		  this.dateTime = datetime;
 				  
 	  }
+
+	public void setId(Long id2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void setUserId(Object getuserId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Long getuserId() {
+		// TODO Auto-generated method stub
+		return this.userId;
+	}
 }

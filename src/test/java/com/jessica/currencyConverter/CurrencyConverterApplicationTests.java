@@ -1,10 +1,10 @@
-package com.jessica.conversorMoeda;
+package com.jessica.currencyConverter;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ConversorMoedaApplicationTests {
+class CurrencyConverterApplicationTests {
 
 	@Test
 	void contextLoads() {
