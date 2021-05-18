@@ -2,8 +2,12 @@ package com.jessica.currencyConverter.entity;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Generated;
@@ -17,37 +21,35 @@ import java.util.List;
 @Table( name = "conversion" )
 public class ConversionEntity {
 	
-	@Getter @Setter
-	  private Long id;
+	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 	
-	@Getter @Setter
-	  private Long userId;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	  private UserEntity user;
 
-	@Getter @Setter
+
 	  private String sourceCurrency;
 
-	@Getter @Setter
+
 	  private String targetCurrency;
 
-	@Getter @Setter
-	  private String sourceValue;
 
-	@Getter @Setter
-	  private String targetValue;
+	  private Long sourceValue;
 
-	@Getter @Setter
-	  private String rate;
 
-	@Getter @Setter
+	  private Long targetValue;
+
+
+	  private float rate;
+
+
 	  private Date dateTime;
 	  
 	  
 
 	  public ConversionEntity() {}
 
-	  public ConversionEntity(Long id, Long userId, String sourceCurrency, String targetCurrency, String sourceValue, String targetValue, String rate, Date datetime) {
+	  public ConversionEntity(Long id, String sourceCurrency, String targetCurrency, Long sourceValue, Long targetValue, Float rate, Date datetime) {
 		  this.id = id;
-		  this.userId = userId;
 		  this.sourceCurrency = sourceCurrency;
 		  this.sourceValue = sourceValue;
 		  this.targetCurrency = targetCurrency;
@@ -57,19 +59,59 @@ public class ConversionEntity {
 				  
 	  }
 
-	public void setId(Long id2) {
-		// TODO Auto-generated method stub
+	  public String getSourceCurrency() {
+			return sourceCurrency;
+		}
+
+		public void setSourceCurrency(String sourceCurrency) {
+			this.sourceCurrency = sourceCurrency;
+		}
+
+		public Long getSourceValue() {
+			return sourceValue;
+		}
+
+		public void setSourceValue(Long sourceValue) {
+			this.sourceValue = sourceValue;
+		}
+
+		public String getTargetCurrency() {
+			return targetCurrency;
+		}
+
+		public void setTargetCurrency(String outputCurrency) {
+			this.targetCurrency = outputCurrency;
+		}
+
+		public Float getRate() {
+			return rate;
+		}
+
+		public void setRate(Float exchangeRate) {
+			this.rate = exchangeRate;
+		}
+
+		public Date getDateTime() {
+			return dateTime;
+		}
+
+		public void setConvertedOnUTC(Date dateTime) {
+			this.dateTime = dateTime;
+		}
+
+		public UserEntity getUser() {
+			return user;
+		}
+
+		public void setUser(UserEntity user) {
+			this.user = user;
+		}
 		
-	}
+		public Long getId() {
+			return id;
+		}
 
-
-	public void setUserId(Object getuserId) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public Long getuserId() {
-		// TODO Auto-generated method stub
-		return this.userId;
-	}
+		public void setId(Long id) {
+			this.id = id;
+		}
 }
