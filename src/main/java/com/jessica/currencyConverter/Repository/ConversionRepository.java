@@ -15,7 +15,7 @@ import lombok.Setter;
 
 public interface ConversionRepository  extends JpaRepository<ConversionEntity, Long>{
 	
-	List<ConversionEntity> findByUserId(UserEntity userId);
+	//List<ConversionEntity> findByUserId(UserEntity userId);
 
 	
 

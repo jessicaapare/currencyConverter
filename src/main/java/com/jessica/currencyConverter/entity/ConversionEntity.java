@@ -6,6 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -14,19 +15,21 @@ import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table( name = "conversion" )
-public class ConversionEntity {
+public class ConversionEntity  implements Serializable {
 	
 	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 	
-	/*@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	  private UserEntity user;
-*/
+	//@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	
+	private UserEntity user;
+
 
 	  private String sourceCurrency;
 
@@ -34,22 +37,22 @@ public class ConversionEntity {
 	  private String targetCurrency;
 
 
-	  private String sourceValue;
+	  private float sourceValue;
 
 
-	  private String targetValue;
+	  private float targetValue;
 
 
-	  private String rate;
+	  private float rate;
 
 
 	  private String dateTime;
 	  
-	  
+	 
 
 	  public ConversionEntity() {}
 
-	  public ConversionEntity(Long id, String sourceCurrency, String targetCurrency, String sourceValue, String targetValue, String rate) {
+	/*  public ConversionEntity(Long id, String sourceCurrency, String targetCurrency, float sourceValue, float targetValue, String rate,UserEntity user) {
 		  this.id = id;
 		  this.sourceCurrency = sourceCurrency;
 		  this.sourceValue = sourceValue;
@@ -57,8 +60,9 @@ public class ConversionEntity {
 		  this.targetValue = targetValue;
 		  this.rate = rate;
 		  this.dateTime = Instant.now().toString();
+		  this.setUser(user);
 				  
-	  }
+	  }*/
 
 	  public String getSourceCurrency() {
 			return sourceCurrency;
@@ -68,11 +72,11 @@ public class ConversionEntity {
 			this.sourceCurrency = sourceCurrency;
 		}
 
-		public String getSourceValue() {
+		public float getSourceValue() {
 			return sourceValue;
 		}
 
-		public void setSourceValue(String sourceValue) {
+		public void setSourceValue(float sourceValue) {
 			this.sourceValue = sourceValue;
 		}
 
@@ -84,19 +88,19 @@ public class ConversionEntity {
 			this.targetCurrency = outputCurrency;
 		}
 		
-		public String getTargetValue() {
+		public float getTargetValue() {
 			return targetValue;
 		}
 
-		public void setTargetValue(String Value) {
+		public void setTargetValue(float Value) {
 			this.targetValue = Value;
 		}
 
-		public String getRate() {
+		public float getRate() {
 			return rate;
 		}
 
-		public void setRate(String exchangeRate) {
+		public void setRate(float exchangeRate) {
 			this.rate = exchangeRate;
 		}
 
@@ -104,18 +108,10 @@ public class ConversionEntity {
 			return dateTime;
 		}
 
-		public void setConvertedOnUTC(String dateTime) {
+		public void setDateTime(String dateTime) {
 			this.dateTime = dateTime;
 		}
 
-		/*public UserEntity getUser() {
-			return user;
-		}
-
-		public void setUser(UserEntity user) {
-			this.user = user;
-		}*/
-		
 		public Long getId() {
 			return id;
 		}
@@ -123,4 +119,31 @@ public class ConversionEntity {
 		public void setId(Long id) {
 			this.id = id;
 		}
+		@ManyToOne(targetEntity=UserEntity.class)
+	    @JoinColumn(name="user_id")
+		public UserEntity getUser() {
+			return user;
+		}
+
+		public void setUser(UserEntity user) {
+			this.user = user;
+		}
+
+		public void conversionCalculation() {
+			// TODO Auto-generated method stub
+			
+			this.targetValue = rate * sourceValue;
+			
+			
+		}
+		
+		public String toString() {
+			// TODO Auto-generated method stub
+			
+			return this.getSourceCurrency() + "  " + this.getSourceValue() + "\n " + this.getTargetCurrency() + "  " + this.getTargetValue() + " \n " + this.getRate(); 
+			
+			
+		}
+		
+		
 }

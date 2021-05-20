@@ -1,5 +1,6 @@
 package com.jessica.currencyConverter.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "`user`")
-public class UserEntity {
+public class UserEntity implements Serializable  {
 	
 	
 	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
