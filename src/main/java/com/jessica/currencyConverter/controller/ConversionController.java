@@ -1,8 +1,10 @@
 package com.jessica.currencyConverter.controller;
 
+import java.io.FileReader;
 import java.io.StringReader;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +41,10 @@ import org.springframework.web.client.RestTemplate;
 import com.jessica.currencyConverter.Repository.*;
 import com.jessica.currencyConverter.entity.ConversionEntity;
 import com.jessica.currencyConverter.model.ConversionModelAssembler;
+
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
+import net.minidev.json.parser.JSONParser;
 
 @RestController
 public
@@ -92,18 +98,12 @@ class ConversionController {
 			String value = jsonObject.get("rates").toString();
 
 			value = value.substring(7,value.length()-1);
-			
-			 System.out.println("vallue " +value);
-			 
-			 System.out.println("vallue " +newConversion.toString());
-			 
-
 			newConversion.setRate(Float.parseFloat(value));
 		    newConversion.conversionCalculation();
-		     System.out.println("valor final" + newConversion.getTargetValue());
+
 		     
-		     System.out.println("vallue " +newConversion.toString());
-			
+		     System.out.println("value :" +newConversion.toString());
+		   			
 			EntityModel<ConversionEntity> entityModel =
 					assembler.toModel(conversionRepository.save(newConversion));
 	 		 	
@@ -112,25 +112,7 @@ class ConversionController {
 					.body(entityModel);
 		}
 
-	
-	
 
-
-	/*  @PutMapping("/conversion/{id}")
-	  ConversionEntity replaceConversion(@RequestBody ConversionEntity newConversion, @PathVariable Long id) {
-	    
-	    return convertionRepository.findById(id)
-	      .map(conversion -> {
-	    	  conversion.setUserId(newConversion.getuserId());
-	    	  
-	    	  
-	        return convertionRepository.save(conversion);
-	      })
-	      .orElseGet(() -> {
-	    	  newConversion.setId(id);
-	        return convertionRepository.save(newConversion);
-	      });
-	  }*/
 
 	  @DeleteMapping("/conversion/{id}")
 	  void deleteConversion(@PathVariable Long id) {
