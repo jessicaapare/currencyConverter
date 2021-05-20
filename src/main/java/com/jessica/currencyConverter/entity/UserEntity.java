@@ -26,15 +26,15 @@ public class UserEntity {
 
 	  private String CPF;
 	  
-	  @OneToMany(mappedBy = "user")
+	  /*@OneToMany(mappedBy = "user")
 		private List<ConversionEntity> conversion = new ArrayList<>();
-
+*/
 
 	  public UserEntity() {}
 
 
 	  
-	  public void addConversionEntry(ConversionEntity conversionEntry) {
+/*	  public void addConversionEntry(ConversionEntity conversionEntry) {
 			conversion.add(conversionEntry);
 			conversionEntry.setUser(this);
 		}
@@ -43,7 +43,7 @@ public class UserEntity {
 			conversion.remove(conversionEntry);
 			conversionEntry.setUser(null);
 		}
-
+*/
 	  public String getName() {
 			return name;
 		}

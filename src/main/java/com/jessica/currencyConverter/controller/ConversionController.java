@@ -3,11 +3,15 @@ package com.jessica.currencyConverter.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jessica.currencyConverter.Repository.*;
 import com.jessica.currencyConverter.entity.ConversionEntity;
-import com.jessica.currencyConverter.exception.RecordNotFoundException;
 import com.jessica.currencyConverter.model.ConversionModelAssembler;
 
 @RestController
@@ -34,7 +37,7 @@ class ConversionController {
 		this.assembler = assembler;
 	}
 
-
+//Get user id
 	@GetMapping("/conversions/{id}")
 	public
 	EntityModel<ConversionEntity> one(@PathVariable Long id) {
@@ -42,6 +45,8 @@ class ConversionController {
 				.orElseThrow(() -> new RecordNotFoundException("Conversion id '" + id + "' does no exist"));
 		return assembler.toModel(conversion);
 	}
+	
+	//get all conversions
 
 	@GetMapping("/conversions")
 	public
@@ -54,11 +59,18 @@ class ConversionController {
 	}
 
 
+// create conversion
+	@PostMapping("/conversions")
+	ResponseEntity<?> newConversion(@RequestBody ConversionEntity newConversion) {
+	 	EntityModel<ConversionEntity> entityModel =
+					assembler.toModel(conversionRepository.save(newConversion));
+			return ResponseEntity
+					.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+					.body(entityModel);
+		}
 
-	@PostMapping("/conversion")
-	  ConversionEntity newConversion(@RequestBody ConversionEntity newConversion) {
-	    return conversionRepository.save(newConversion);
-	  }
+	
+	
 
 
 	/*  @PutMapping("/conversion/{id}")

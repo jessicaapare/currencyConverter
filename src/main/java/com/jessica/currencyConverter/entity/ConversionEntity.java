@@ -14,6 +14,7 @@ import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -23,9 +24,9 @@ public class ConversionEntity {
 	
 	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	/*@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	  private UserEntity user;
-
+*/
 
 	  private String sourceCurrency;
 
@@ -33,29 +34,29 @@ public class ConversionEntity {
 	  private String targetCurrency;
 
 
-	  private Long sourceValue;
+	  private String sourceValue;
 
 
-	  private Long targetValue;
+	  private String targetValue;
 
 
-	  private float rate;
+	  private String rate;
 
 
-	  private Date dateTime;
+	  private String dateTime;
 	  
 	  
 
 	  public ConversionEntity() {}
 
-	  public ConversionEntity(Long id, String sourceCurrency, String targetCurrency, Long sourceValue, Long targetValue, Float rate, Date datetime) {
+	  public ConversionEntity(Long id, String sourceCurrency, String targetCurrency, String sourceValue, String targetValue, String rate) {
 		  this.id = id;
 		  this.sourceCurrency = sourceCurrency;
 		  this.sourceValue = sourceValue;
 		  this.targetCurrency = targetCurrency;
 		  this.targetValue = targetValue;
 		  this.rate = rate;
-		  this.dateTime = datetime;
+		  this.dateTime = Instant.now().toString();
 				  
 	  }
 
@@ -67,11 +68,11 @@ public class ConversionEntity {
 			this.sourceCurrency = sourceCurrency;
 		}
 
-		public Long getSourceValue() {
+		public String getSourceValue() {
 			return sourceValue;
 		}
 
-		public void setSourceValue(Long sourceValue) {
+		public void setSourceValue(String sourceValue) {
 			this.sourceValue = sourceValue;
 		}
 
@@ -82,30 +83,38 @@ public class ConversionEntity {
 		public void setTargetCurrency(String outputCurrency) {
 			this.targetCurrency = outputCurrency;
 		}
+		
+		public String getTargetValue() {
+			return targetValue;
+		}
 
-		public Float getRate() {
+		public void setTargetValue(String Value) {
+			this.targetValue = Value;
+		}
+
+		public String getRate() {
 			return rate;
 		}
 
-		public void setRate(Float exchangeRate) {
+		public void setRate(String exchangeRate) {
 			this.rate = exchangeRate;
 		}
 
-		public Date getDateTime() {
+		public String getDateTime() {
 			return dateTime;
 		}
 
-		public void setConvertedOnUTC(Date dateTime) {
+		public void setConvertedOnUTC(String dateTime) {
 			this.dateTime = dateTime;
 		}
 
-		public UserEntity getUser() {
+		/*public UserEntity getUser() {
 			return user;
 		}
 
 		public void setUser(UserEntity user) {
 			this.user = user;
-		}
+		}*/
 		
 		public Long getId() {
 			return id;

@@ -7,8 +7,8 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
-import com.jessica.currencyConverter.entity.ConversionEntity;
 import com.jessica.currencyConverter.controller.ConversionController;
+import com.jessica.currencyConverter.entity.ConversionEntity;
 
 @Component
 public class ConversionModelAssembler implements RepresentationModelAssembler<ConversionEntity, EntityModel<ConversionEntity>> {

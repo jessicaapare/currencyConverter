@@ -1,5 +1,8 @@
 package com.jessica.currencyConverter.controller;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,10 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jessica.currencyConverter.Repository.UserRepository;
 import com.jessica.currencyConverter.entity.UserEntity;
-import com.jessica.currencyConverter.exception.RecordNotFoundException;
 import com.jessica.currencyConverter.model.UserModelAssembler;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
 public class UserController {

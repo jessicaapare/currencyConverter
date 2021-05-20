@@ -1,4 +1,4 @@
-package com.jessica.currencyConverter.exception;
+package com.jessica.currencyConverter.controller;
 
 import java.util.ArrayList;
 import java.util.List;
